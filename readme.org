@@ -1,0 +1,36 @@
+* FRAMEWORK PARA LA AUTOMATIZACIÓN DE PRUEBAS EN EW
+** Diagrama de despligue
+*** Instancia única maestro-esclavo
+*** Un maestro con uno o varios esclavos
+**** Diagrama de arquitectura de red
+** Anexos 
+*** Guia de instalación 
+**** Instancia única maestro-esclavo
+El método de instalación básico y recomendado por Linaro consiste en instalar dentro de un host
+tanto el maestro como el esclavo. Al host tambíen será necesario conectarle los DUTs.
+Este método no precisa de configuraciones adicionales a las instaladas por defecto.
+Para familiarizarmos con los diferentes componentes de LAVA se optó por una instalación básica.
+No se recomienda llevar acabo este tipo de instalación en producción.
+Necesitamos tener acceso a los paquetes del repositorio de LAVA antes de empezar con la 
+instalación. Los comandos que debemos de ejecutar son :
+#+BEGIN_SRC shell
+# instalacion **wget**
+sudo apt install -y wget
+# importamos la clave del repositorio
+wget --quiet -O - https://apt.lavasoftware.org/lavasoftware.key.asc | sudo apt-key add -
+# habilitamos la descarga de paquetes del repositorio 
+RELEASE=$(lsb_release -cs)
+echo "https://apt.lavasoftware.org/release ${RELEASE}" main | sudo tee  /etc/apt/sources.list.d/lavadg.list
+#+END_SRC
+Para instalar LAVA dentro del host ejecutaremos dentro de un términal :
+#+BEGIN_SRC shell
+sudo apt update
+sudo apt install postgresql
+sudo apt install lava
+#+END_SRC
+
+
+
+
+
+
