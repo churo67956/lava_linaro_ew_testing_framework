@@ -1,0 +1,66 @@
+* A instalación única
+Llegados a un determinado instante es necesario remplantearse la solución e
+inclusive trabajar más duro que antes para obtener un acabado mejor.
+Hasta la fecha no llego el seguimiento de ninguna de las configuraciones que he
+ido realizando a lava, salto unos archivos con anotaciones de las modificaciones
+realizadas pero no están al dia.
+Vamos a volver al origen, es decir a dejar los ficheros de configuración de
+tal forma que el acceso a la instancia de lava sea mediante la url http:/localhost/
+
+
+**  Worker
+El worker conste de un unico servicio lava-worker y por tanto lo vamos a parar.
+Voy a hacer un recordatorio a muy alto nivel de la interacción con el maestro.
+- Arrancar servicio lava-worker
+- /usr/bin/lava-worker llama al método main del módulo worker del paquete lava_dispatcher.
+- Desde el método main se llama a otro metodo man_loop y este llama al metodo handler
+- El método hander se encarga de realizar pings al maestro y la par que solicita el listado
+ de jobs. Y también se lanzan los jobs al DUT método start. Finalmente se encarga de 
+ comprobar que los jobs realmente se han lanzado y se motificar al servidor el exito
+ o fracaso del job.
+ Desde el método start se llama al método start_job que el que verdaderamente lanza 
+ proceso encargado de ejecutar el job en el DUT.
+- En start_job se llama al programa /usr/bin/lava-run con toda la información necesaria
+para empezar el job.
+- /usr/bin/lava_run se encarga de generar el pipeline, es decir a parti de la definicion
+del dispositivo y del job seleccionar el DUT más adecuado, lanzar las pruebas, recolectar´
+los resultados y notificarlos para tener acceso desde el FRONTEND.
+*** Parar el worker 
+Vamos a crear una función a la que llamaremos worker_parar dentro de $HOME/.bash_lava
+encarga de parar el servicio.
+Abrimos un terminal y lanzamos la función *lava_worker_parar* . 
+
+** Master
+El master es más complejo y posee una mayor cantidad de componentes.
+Los principales servicios son :
+- lava-server-gunicorn
+- lava-scheduler
+- lava-publisher
+- lava-worker
+- apache2
+- postgres
+*** Parar el master
+Tenemos un función llamada master_parar que se encarga de parar los siguientes servicios :
+- lava-server-gunicorn
+- lava-scheduler
+- lava-publisher
+- lava-worker
+- apache2
+  
+** Gestion de la configuración
+
+Antes de empezar a para los servicios vamos describir el layout para la gestión de la configuracio
+configs
+configs/default/lava-worker
+
+
+
+
+
+
+Información adicional :
+http://192.168.0.26/static/docs/v2/admin-backups.html#restoring-a-master-from-a-backup
+
+** Parar todos los servicios del maestro
+Vamos a crear un funcion que nos permitar parar todos los servicios del maestro
+ 

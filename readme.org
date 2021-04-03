@@ -5,6 +5,19 @@
 **** Diagrama de arquitectura de red
 ** Anexos 
 *** Guia de instalación 
+**** COMMENT Pasos previos 
+***** Master 
+****** Definir variables de ambiente
+Los pasos previos nos van pérmitir definir accesos rápidos a los directorios de trabajos :
+- $TFG es el directorio donde tengo almancenado mi trabajo fin de grado
+- LAVA_MASTER_CONF es el directorio donde reside toda la configuración referente a lava. En el caso de 
+de la instalación única el directorio contiene los ficheros de configuración tanto del maestro como del esclavo
+Por lo tanto en el host que hace de maestro el directorio la configuración del mismo.
+- $LAVA_MASTER_DISPATCHER es el directorio donde se almacena los templates : device-types y device-dictionaries.
+- $LAVA_MASTER_LOG es el directorio con los fichero de log
+- $LAVA_MASTER_FRONTEND_SRC directorio con el código del frontent
+- $LAVA_MASTER_FRONTEND_TEMPLATES directorio con las plantillas html
+
 **** Instancia única maestro-esclavo
 El método de instalación básico y recomendado por Linaro consiste en instalar dentro de un host
 tanto el maestro como el esclavo. Al host tambíen será necesario conectarle los DUTs.
@@ -31,6 +44,8 @@ sudo apt install lava
 
 
 
-
+** Seguridad
+*** HTTPs
+*** Backups
 
 
