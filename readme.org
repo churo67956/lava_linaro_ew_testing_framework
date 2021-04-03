@@ -48,4 +48,10 @@ sudo apt install lava
 *** HTTPs
 *** Backups
 
+* Agenda
+** TODO Root
+Explicar que es necesario emplear el usuario root para mover los ficheros con el usuario normal
+no vale.
+** TODO Registro del worker
+Pasos a seguir
 
